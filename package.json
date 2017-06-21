@@ -1,0 +1,23 @@
+{
+  "name": "react-react-router-redux-isomorphism",
+  "version": "1.0.0",
+  "description": "isomorphism from react react-router redux webpack express",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/The-End-Hero/react-react-router-redux-isomorphism.git"
+  },
+  "keywords": [
+    "isomorphism",
+    "react"
+  ],
+  "author": "xiping.wang",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/The-End-Hero/react-react-router-redux-isomorphism/issues"
+  },
+  "homepage": "https://github.com/The-End-Hero/react-react-router-redux-isomorphism#readme"
+}
