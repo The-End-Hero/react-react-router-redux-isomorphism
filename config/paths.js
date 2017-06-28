@@ -31,6 +31,7 @@ var nodePaths = (process.env.NODE_PATH || '')
   .filter(folder => !path.isAbsolute(folder))
   .map(resolveApp);
 
+// paths模块
 // config after eject: we're in ./config/
 module.exports = {
   appBuild: resolveApp('build'),
