@@ -4,4 +4,4 @@ package.json中的脚本部分已经默认在命令前添加了node_modules/.bin
 
 webpack devtool(Source Maps)
 
-要运行npm run start_prod 需要先npm run build
+要运行npm run start_prod 需要先npm run build（config/webpack.config.prod.js中fileName: 'asset-manifest.json'在build目录下）
