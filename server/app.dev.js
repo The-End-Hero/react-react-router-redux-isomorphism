@@ -32,6 +32,7 @@ app.use(require('webpack-hot-middleware')(compiler, {
 }));
 
 app.use('/api/count', (req, res) => {
+  // dev下,没有跨域限制  cors
   res.header("Access-Control-Allow-Origin", "*")
   res.json({count: 100});
 });

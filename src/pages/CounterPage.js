@@ -11,7 +11,7 @@ const page = () => {
 };
 
 // 端口号  如果环境变量没有，则默认值9000
-const END_POINT = process.env.HOST_NAME || 'http://123.206.206.21:9000';
+const END_POINT = process.env.HOST_NAME || '123.206.206.21:9000';
 
 // 初始化state
 const initState = () => {

@@ -11,6 +11,7 @@ const assetManifest = require(path.resolve(__dirname, '../build/asset-manifest.j
 app.use(express.static(path.resolve(__dirname, '../build')));
 
 app.use('/api/count', (req, res) => {
+  // 有跨域限制
   res.json({count: 100});
 });
 
