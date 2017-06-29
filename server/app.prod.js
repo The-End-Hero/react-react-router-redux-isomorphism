@@ -11,7 +11,8 @@ const assetManifest = require(path.resolve(__dirname, '../build/asset-manifest.j
 app.use(express.static(path.resolve(__dirname, '../build')));
 
 app.use('/api/count', (req, res) => {
-  res.json({count: 100});
+    res.header("Access-Control-Allow-Origin", "*")
+    res.json({count: 100});
 });
 
 app.get('*', (req, res) => {
