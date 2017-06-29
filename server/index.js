@@ -3,7 +3,7 @@
 require('babel-register');
 require('isomorphic-fetch');
 
-// 根据环境变量加载对应环境的js
+// 根据环境变量加载对应环境的express实例
 const isProductionMode = (process.env.NODE_ENV === 'production');
 const app = isProductionMode ? require('./app.prod.js'): require('./app.dev.js');
 

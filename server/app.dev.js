@@ -40,7 +40,7 @@ app.get('*', (req, res) => {
   if (!assetManifest) {
     assetManifest = getAssetManifest();
   }
-
+  // 任何情况下，都返回match的路由
   return renderPage(req, res, assetManifest);
 });
 

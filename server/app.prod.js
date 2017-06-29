@@ -15,6 +15,7 @@ app.use('/api/count', (req, res) => {
 });
 
 app.get('*', (req, res) => {
+  // 任何情况下，返回match的路由
   return renderPage(req, res, assetManifest);
 });
 
