@@ -32,6 +32,11 @@ app.use(require('webpack-hot-middleware')(compiler, {
 }));
 
 app.use('/api/count', (req, res) => {
+  // dev下,没有跨域限制  cors
+    //Access-Control-Allow-Credentials:true 是否允许请求带有验证信息
+    //Access-Control-Allow-Headers:* 允许自定义的头部，以逗号隔开，大小写不敏感
+    //Access-Control-Allow-Methods:* 允许使用的请求方法，以逗号隔开
+    //Access-Control-Allow-Origin:http://www.juzizixun.com
   res.header("Access-Control-Allow-Origin", "*")
   res.json({count: 100});
 });

@@ -10,9 +10,10 @@ const page = () => {
   );
 };
 
-// 端口号  如果环境变量没有，则默认值9000
+// 端口号  如果环境变量没有HOST_NAME，则给默认值
 const END_POINT = process.env.HOST_NAME || '123.206.206.21:9000';
-
+console.log('111111111111-------------11111111111--------------111111111111')
+console.log(process.env.HOST_NAME)
 // 初始化state
 const initState = () => {
   return fetch(`http://${END_POINT}/api/count`).then(response => {

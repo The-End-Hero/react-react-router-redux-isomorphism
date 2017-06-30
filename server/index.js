@@ -1,4 +1,4 @@
-// babel-register在node中使用babel，毕竟node8才开始支持import
+// babel-register在node中使用babel，毕竟node 8.0 才开始支持import
 // isomorphoc-fetch 同构的fetch，支持前后端
 require('babel-register');
 require('isomorphic-fetch');
