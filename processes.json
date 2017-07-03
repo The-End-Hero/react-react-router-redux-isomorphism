@@ -1,22 +1,22 @@
 {
-  "apps": [
+  "apps": [  // json结构，apps是一个数组，每一个数组成员就是对应一个pm2中运行的应用
     {
-      "name": "multi_pages",
-      "cwd": "./",
+      "name": "multi_pages", // 应用程序的名称
+      "cwd": "./",     // 当前文件的地址，script，error_file,out_file,pid_file等 都是相对cwd
       "script": "server/index.js",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
       "error_file": "/var/log/node-app/node-app.stderr.log",
       "out_file": "log/node-app.stdout.log",
       "pid_file": "pids/node-geo-api.pid",
-      // "instances": 6,
-      "min_uptime": "200s",
-      "max_restarts": 10,
-      // "max_memory_restart": "1M",
+       "instances": 1,   // 开启多少个
+      "min_uptime": "200s", // 最小运行时间，这里设置的是60s即如果应用程序在60s内退出，pm2会认为程序异常退出，此时触发重启max_restarts设置数量
+      "max_restarts": 10,   // 设置应用程序异常退出重启的次数，默认15次（从0开始计数）
+      // "max_memory_restart": "1M", // 设置应用程序的最大内存
       // "cron_restart": "1 0 * * *",
-      "watch": false,
+      "watch": false,  // 监控模式，默认false，可以设置成true，数组
       "merge_logs": true,
       "exec_interpreter": "node",
-      "exec_mode": "fork",
+      "exec_mode": "fork", // 默认fork单核，在多核处理器上应当优先考虑cluster_mode（集群）。
       "autorestart": false,
       "vizion": false,
       "env": {

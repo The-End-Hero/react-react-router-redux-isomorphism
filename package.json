@@ -71,7 +71,7 @@
     "start:isomorphic": "cross-env NODE_ENV=development node server/index.js",
     "start_prod": "cross-env NODE_ENV=production node server/index.js",
     "test": "node scripts/test.js --env=jsdom",
-    "pm2": "pm2 start processes.json"
+    "pm2": "pm2 start processes.json "
   },
   "jest": {
     "collectCoverageFrom": [
