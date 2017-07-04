@@ -34,6 +34,7 @@ module.exports = {
     // These are the "entry points" to our application.
     // This means they will be the "root" imports that are included in JS bundle.
     // The first two entry points enable "hot" CSS and auto-refreshes for JS.
+    // 入口文件配置
     entry: [
         // Include an alternative client for WebpackDevServer. A client's job is to
         // connect to WebpackDevServer by a socket and get notified about changes.
@@ -57,6 +58,7 @@ module.exports = {
         // initialization, it doesn't blow up the WebpackDevServer client, and
         // changing JS code would still trigger a refresh.
     ],
+    // 入口文件输出配置
     output: {
         // Next line is not used in dev but WebpackDevServer crashes without it:
         path: paths.appBuild,
@@ -158,6 +160,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: 'style!css?importLoaders=1!postcss' // 感叹号的作用在于使同一文件能够使用不同类型的loader
+                // "-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
             },
             // JSON is not enabled by default in Webpack but both Node and Browserify
             // allow it implicitly so we also enable it.
