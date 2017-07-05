@@ -69,13 +69,14 @@ recursive(paths.appBuild, (err, fileNames) => {
   fs.emptyDirSync(paths.appBuild);
 
   // Start the webpack build
+  console.log('previousSizeMap:'+previousSizeMap);
   build(previousSizeMap);
 
   // Merge with the public folder
   copyPublicFolder();
 });
 
-// Print a detailed summary of build files.
+// Print a detailed summary of build files. 答应gzip压缩过后的大小
 function printFileSizes(stats, previousSizeMap) {
   var assets = stats.toJson().assets
     .filter(asset => /\.(js|css)$/.test(asset.name))
@@ -106,6 +107,7 @@ function printFileSizes(stats, previousSizeMap) {
       '  ' + sizeLabel +
       '  ' + chalk.dim(asset.folder + path.sep) + chalk.cyan(asset.name)
     );
+    console.log('这是printFileSize函数');
   });
 }
 
@@ -125,6 +127,7 @@ function build(previousSizeMap) {
   webpack(config).run((err, stats) => {
     if (err) {
       printErrors('Failed to compile.', [err]);
+      // process.exit方法用来退出当前进程。它可以接受一个数值参数，如果参数大于0，表示执行失败；如果等于0表示执行成功。
       process.exit(1);
     }
 
@@ -145,7 +148,7 @@ function build(previousSizeMap) {
     console.log();
     printFileSizes(stats, previousSizeMap);
     console.log();
-
+    // process.platform：返回一个字符串，表示当前的操作系统，比如Linux。
     var openCommand = process.platform === 'win32' ? 'start' : 'open';
     var appPackage  = require(paths.appPackageJson);
     var homepagePath = appPackage.homepage;
