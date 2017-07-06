@@ -144,11 +144,11 @@ module.exports = {
                 include: paths.appSrc,
                 loader: 'babel',// 在webpack的module部分的loaders里进行配置即可
                 query: {
-
+                    presets: ['es2015', 'react', 'stage-0'],
                     // This is a feature of `babel-loader` for webpack (not Babel itself).
                     // It enables caching results in ./node_modules/.cache/babel-loader/
                     // directory for faster rebuilds.
-                    cacheDirectory: true // 缓存
+                    // cacheDirectory: true // 缓存
                 }
             },
             // "postcss" loader applies autoprefixer to our CSS.
@@ -159,8 +159,17 @@ module.exports = {
             // css-loader使你能够使用类似@import 和 url(...)的方法实现 require()的功能,style-loader将所有的计算后的样式加入页面中，二者组合在一起使你能够把样式表嵌入webpack打包后的JS文件中。
             {
                 test: /\.css$/,
-                loader: 'style!css?importLoaders=1!postcss' // 感叹号的作用在于使同一文件能够使用不同类型的loader
-                // "-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
+                // loader: 'style!css?importLoaders=1!postcss' // 感叹号的作用在于使同一文件能够使用不同类型的loader
+                // 低版本中"-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
+                loader:'style-loader!css-loader'
+            },
+            {
+                test: /\.scss$/,
+                loaders: [
+                    'style',
+                    'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
+                    'sass'
+                ]
             },
             // JSON is not enabled by default in Webpack but both Node and Browserify
             // allow it implicitly so we also enable it.
