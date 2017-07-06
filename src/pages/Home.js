@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
+
 const Home = ({greetings}) => {
   return (
     <div>
-      <div>Home</div>
+      <div>Home123123</div>
       <div>{greetings}</div>
     </div>
   );

@@ -4,7 +4,7 @@ import ReactDOMServer from 'react-dom/server';
 import {Router, Route, match, RouterContext, IndexRoute, browserHistory} from 'react-router';
 import {Provider} from 'react-redux';
 import {combineReducers} from 'redux';
-
+import { ServerStyleSheet } from 'styled-components'; // styled-components的服务端渲染
 // store
 import {configureStore} from '../src/Store.js';
 
@@ -15,6 +15,8 @@ import {page as CounterPage, reducer, stateKey, initState} from '../src/pages/Co
 import About from '../src/pages/About.js';
 import NotFound from '../src/pages/NotFound.js';
 
+
+const sheet = new ServerStyleSheet()
 // routes变量，准备给match函数匹配
 const routes = (
   <Route path="/" component={App}>
@@ -58,12 +60,13 @@ function renderMatchedPage(req, res, renderProps, assetManifest) {
     }
 
     // react-redux Provider标签包裹，注入store
-    const appHtml = ReactDOMServer.renderToString(
-      <Provider store={store}>
-        <RouterContext {...renderProps} />
-      </Provider>
-    );
-
+    const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
+        <Provider store={store}>
+          <RouterContext {...renderProps} />
+        </Provider>
+    ));
+    // const css = sheet.getStyleTags()
+    // console.log('我是css：'+css)
     const dehydratedState= store.getState();
 
     return res.render('index', {
@@ -71,7 +74,8 @@ function renderMatchedPage(req, res, renderProps, assetManifest) {
       PUBLIC_URL: '/',
       assetManifest: assetManifest,
       appHtml: appHtml,
-      dehydratedState: safeJSONstringify(dehydratedState)
+      dehydratedState: safeJSONstringify(dehydratedState),
+      // appStyle: css,
     });
   });
 }
