@@ -163,14 +163,6 @@ module.exports = {
                 // 低版本中"-loader"其实是可以省略不写的，多个loader之间用“!”连接起来。
                 loader:'style-loader!css-loader'
             },
-            {
-                test: /\.scss$/,
-                loaders: [
-                    'style',
-                    'css-loader?modules&camelCase&importLoaders=1&localIdentName=[name]__[local]__[hash:base64:8]',
-                    'sass'
-                ]
-            },
             // JSON is not enabled by default in Webpack but both Node and Browserify
             // allow it implicitly so we also enable it.
             {

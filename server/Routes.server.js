@@ -60,12 +60,13 @@ function renderMatchedPage(req, res, renderProps, assetManifest) {
     }
 
     // react-redux Provider标签包裹，注入store
-    const appHtml = ReactDOMServer.renderToString(sheet.collectStyles(
+    const appHtml = ReactDOMServer.renderToString(
         <Provider store={store}>
           <RouterContext {...renderProps} />
         </Provider>
-    ));
-    // const css = sheet.getStyleTags()
+    );
+    // 提取出styled-components style标签 ，并且写入到ejs的head里面
+    const css = sheet.getStyleTags()
     // console.log('我是css：'+css)
     const dehydratedState= store.getState();
 
@@ -75,7 +76,7 @@ function renderMatchedPage(req, res, renderProps, assetManifest) {
       assetManifest: assetManifest,
       appHtml: appHtml,
       dehydratedState: safeJSONstringify(dehydratedState),
-      // appStyle: css,
+      appStyle: css,
     });
   });
 }
