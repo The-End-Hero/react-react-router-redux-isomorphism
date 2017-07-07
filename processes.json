@@ -5,7 +5,7 @@
       "cwd": "./",     // 当前文件的地址，script，error_file,out_file,pid_file等 都是相对cwd
       "script": "server/index.js",
       "log_date_format": "YYYY-MM-DD HH:mm Z",
-      "error_file": "/var/log/node-app/node-app.stderr.log",
+      "error_file": "var/log/node-app/node-app.stderr.log",
       "out_file": "log/node-app.stdout.log",
       "pid_file": "pids/node-geo-api.pid",
        "instances": 1,   // 开启多少个
