@@ -59,7 +59,16 @@ const getCounterPage = (nextState, callback) => {
     });
   }, 'counter');
 };
-
+const getH51Page = (nextState, callback) => {
+    require.ensure([], function(require) {
+        callback(null, require('./pages/h5-hm-1.js').default);
+    }, 'about');
+};
+// const getAboutPage = (nextState, callback) => {
+//     require.ensure([], function(require) {
+//         callback(null, require('./pages/About.js').default);
+//     }, 'about');
+// };
 const getNotFoundPage = (nextState, callback) => {
   require.ensure([], function(require) {
     callback(null, require('./pages/NotFound.js').default);
@@ -76,6 +85,7 @@ const routes = (
     <Route path="home" getComponent={getHomePage} />
     <Route path="counter" getComponent={getCounterPage} />
     <Route path="about" getComponent={getAboutPage} />
+    <Route path="h51" getComponent={getH51Page}/>
     <Route path="*" getComponent={getNotFoundPage} />
   </Route>
 );
@@ -90,7 +100,7 @@ export const renderRoutes = (domElement) => {
       domElement
     );
   });
-}
+};
 
 
 

@@ -14,6 +14,7 @@ import Home from '../src/pages/Home.js';
 import {page as CounterPage, reducer, stateKey, initState} from '../src/pages/CounterPage.js';
 import About from '../src/pages/About.js';
 import NotFound from '../src/pages/NotFound.js';
+import h51 from '../src/pages/h5-hm-1'
 
 
 const sheet = new ServerStyleSheet()
@@ -24,6 +25,7 @@ const routes = (
     <Route path="home" component={Home} />
     <Route path="counter" component={CounterPage} />
     <Route path="about" component={About} />
+    <Route path="h51" component={h51}/>
     <Route path="*" component={NotFound} />
   </Route>
 );

@@ -9,16 +9,30 @@ const buttonStyle = {
 
 export const stateKey = 'counter';
 
-function Counter({onIncrement, onDecrement, value}) {
-  return (
-    <div>
-      <button style={buttonStyle} onClick={onIncrement}>+</button>
-      <button style={buttonStyle} onClick={onDecrement}>-</button>
-      <span>Count: {value}</span>
-    </div>
-  );
+// function Counter({onIncrement, onDecrement, value}) {
+//   return (
+//     <div>
+//       <button style={buttonStyle} onClick={onIncrement}>+</button>
+//       <button style={buttonStyle} onClick={onDecrement}>-</button>
+//       <span>Count: {value}</span>
+//     </div>
+//   );
+// }
+class Counter extends React.Component{
+    // constructor(props,context){
+    //     super(props, context);
+    // }
+    render(){
+        const {onIncrement, onDecrement, value} = this.props;
+        return(
+                <div>
+                    <button style={buttonStyle} onClick={onIncrement}>+</button>
+                    <button style={buttonStyle} onClick={onDecrement}>-</button>
+                    <span>Count: {value}</span>
+                </div>
+            )
+    }
 }
-
 Counter.propTypes = {
   onIncrement: PropTypes.func.isRequired,
   onDecrement: PropTypes.func.isRequired,
