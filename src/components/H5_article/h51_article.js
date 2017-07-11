@@ -26,7 +26,7 @@ const Itemarray = (props)=>{
     const liarray= [];
     for(let i=0;i<props.value.length;i++){
         liarray.push(
-            <li key={i}>{props.value[i].recommendationData.tags}</li>
+            <li key={i}>最高气温:{props.value[i].tmp.max}最低气温:{props.value[i].tmp.min}</li>
         );
     }
     return (
