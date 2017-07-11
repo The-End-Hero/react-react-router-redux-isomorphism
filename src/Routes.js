@@ -61,8 +61,24 @@ const getCounterPage = (nextState, callback) => {
 };
 const getH51Page = (nextState, callback) => {
     require.ensure([], function(require) {
-        callback(null, require('./pages/h5-hm-1.js').default);
-    }, 'about');
+        const {h51, h5reducer, h5stateKey, h5initState} = require('./pages/H5-hm-1.js');
+        const dehydratedState = (win && win.DEHYDRATED_STATE);
+        const state = store.getState();
+        const mergedState = {...dehydratedState, ...state};
+        const statePromise = mergedState[h5stateKey]
+            ? Promise.resolve(mergedState[h5stateKey])
+            : h5initState();
+        statePromise.then((result) => {
+            store.reset(combineReducers({
+                ...store._reducers,
+                [h5stateKey]: h5reducer
+            }), {
+                ...state,
+                [h5stateKey]: result
+            });
+            callback(null, h51);
+        });
+    }, 'h51');
 };
 // const getAboutPage = (nextState, callback) => {
 //     require.ensure([], function(require) {

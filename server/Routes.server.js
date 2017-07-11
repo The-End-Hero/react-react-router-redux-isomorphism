@@ -12,9 +12,10 @@ import {configureStore} from '../src/Store.js';
 import App from '../src/pages/App.js';
 import Home from '../src/pages/Home.js';
 import {page as CounterPage, reducer, stateKey, initState} from '../src/pages/CounterPage.js';
+import {h51 as H51, h5reducer, h5stateKey, h5initState} from '../src/pages/H5-hm-1.js';
 import About from '../src/pages/About.js';
 import NotFound from '../src/pages/NotFound.js';
-import h51 from '../src/pages/h5-hm-1'
+
 
 
 const sheet = new ServerStyleSheet()
@@ -25,7 +26,7 @@ const routes = (
     <Route path="home" component={Home} />
     <Route path="counter" component={CounterPage} />
     <Route path="about" component={About} />
-    <Route path="h51" component={h51}/>
+    <Route path="h51" component={H51}/>
     <Route path="*" component={NotFound} />
   </Route>
 );
@@ -35,6 +36,11 @@ const pathInitData = {
     stateKey,
     reducer,
     initState
+  },
+  '/h51': {
+      h5stateKey,
+      h5reducer,
+      h5initState
   }
 }
 
@@ -42,47 +48,115 @@ function safeJSONstringify(obj) {
   return JSON.stringify(obj).replace(/<\/script/g, '<\\/script').replace(/<!--/g, '<\\!--');
 }
 
-function renderMatchedPage(req, res, renderProps, assetManifest) {
-  const store = configureStore();
-  const path= renderProps.location.pathname;
-  const pathInfo = pathInitData[path] || {};
-  const {stateKey, reducer, initState} = pathInfo;
-  const statePromise = (initState) ? initState() : Promise.resolve(null);
+function fetchComponentData(dispatch, components, params) {
+    const needs = components.reduce( (prev, current) => {
 
-  statePromise.then((result) => {
-    if (stateKey) {
-      const state = store.getState();
-      store.reset(combineReducers({
-        ...store._reducers,
-        [stateKey]: reducer
-      }), {
-        ...state,
-        [stateKey]: result
-      });
+        return current ? (current.needs || []).concat(prev) : prev;
+    }, []);
+
+    const promises = needs.map(need => dispatch(need(params)));
+
+    return Promise.all(promises);
+}
+const store = configureStore();
+function renderMatchedPage(req, res, renderProps, assetManifest) {
+
+  const path= renderProps.location.pathname;
+  console.log('path======='+path)
+  const pathInfo = pathInitData[path] || {};
+  console.log('pathInfo======='+JSON.stringify(pathInfo))
+  // const {stateKey, reducer, initState} = pathInfo;
+  // console.log('stateKey===='+stateKey)
+  // console.log('reducer======'+reducer)
+  // console.log('initState======'+initState)
+  // const {h5stateKey,h5reducer, h5initState} = pathInfo;
+
+
+  // const statePromise = (initState) ? initState() : Promise.resolve(null);
+  // statePromise.then((result) => {
+  //   if (stateKey) {
+  //     const state = store.getState();
+  //     store.reset(combineReducers({
+  //       ...store._reducers,
+  //       [stateKey]: reducer
+  //     }), {
+  //       ...state,
+  //       [stateKey]: result
+  //     });
+  //   }
+  //
+  //   // react-redux Provider标签包裹，注入store
+  //   const appHtml = ReactDOMServer.renderToString(
+  //       <Provider store={store}>
+  //         <RouterContext {...renderProps} />
+  //       </Provider>
+  //   );
+  //   // 提取出styled-components style标签 ，并且写入到ejs的head里面
+  //   const css = sheet.getStyleTags()
+  //   // console.log('我是css：'+css)
+  //   const dehydratedState= store.getState();
+  //
+  //   return res.render('index', {
+  //     title: 'Sample React App',
+  //     PUBLIC_URL: '/',
+  //     assetManifest: assetManifest,
+  //     appHtml: appHtml,
+  //     dehydratedState: safeJSONstringify(dehydratedState),
+  //     appStyle: css,
+  //   });
+  // });
+
+
+    if(path === '/h51'){
+        const {h5stateKey,h5reducer, h5initState} = pathInfo;
+        renderPageredux(req, res, renderProps, assetManifest,h5stateKey,h5reducer, h5initState)
+    }else if(path === 'counter'){
+        const {stateKey, reducer, initState} = pathInfo;
+        renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer, initState)
+    }else{
+        const {stateKey, reducer, initState} = pathInfo;
+        renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer, initState)
     }
 
-    // react-redux Provider标签包裹，注入store
-    const appHtml = ReactDOMServer.renderToString(
-        <Provider store={store}>
-          <RouterContext {...renderProps} />
-        </Provider>
-    );
-    // 提取出styled-components style标签 ，并且写入到ejs的head里面
-    const css = sheet.getStyleTags()
-    // console.log('我是css：'+css)
-    const dehydratedState= store.getState();
-
-    return res.render('index', {
-      title: 'Sample React App',
-      PUBLIC_URL: '/',
-      assetManifest: assetManifest,
-      appHtml: appHtml,
-      dehydratedState: safeJSONstringify(dehydratedState),
-      appStyle: css,
-    });
-  });
 }
+function renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer, initState) {
+    console.log('stateKey===='+stateKey)
+    console.log('reducer======'+reducer)
+    console.log('initState======'+initState)
+    const statePromise = (initState) ? initState() : Promise.resolve(null);
+    statePromise.then((result) => {
+        if (stateKey) {
+            const state = store.getState();
+            store.reset(combineReducers({
+                ...store._reducers,
+                [stateKey]: reducer
+            }), {
+                ...state,
+                [stateKey]: result
+            });
+        }
 
+        // react-redux Provider标签包裹，注入store
+        const appHtml = ReactDOMServer.renderToString(
+            <Provider store={store}>
+                <RouterContext {...renderProps} />
+            </Provider>
+        );
+        // 提取出styled-components style标签 ，并且写入到ejs的head里面
+        const css = sheet.getStyleTags()
+        // console.log('我是css：'+css)
+        const dehydratedState= store.getState();
+
+        return res.render('index', {
+            title: 'Sample React App',
+            PUBLIC_URL: '/',
+            assetManifest: assetManifest,
+            appHtml: appHtml,
+            dehydratedState: safeJSONstringify(dehydratedState),
+            appStyle: css,
+        });
+    });
+}
 export const renderPage = (req, res, assetManifest) => {
   // match函数  react-router  同构前后端路由匹配
   match({routes: routes, location: req.url}, function(err, redirect, renderProps) {
@@ -98,7 +172,7 @@ export const renderPage = (req, res, assetManifest) => {
       return res.status(404).send('Not Found');
     }
 
-    return renderMatchedPage(req, res, renderProps, assetManifest);
+    return fetchComponentData(store.dispatch, renderProps.components, renderProps.params).then(()=>renderMatchedPage(req, res, renderProps, assetManifest));
   });
 };
 

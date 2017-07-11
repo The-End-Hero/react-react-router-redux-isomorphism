@@ -3,14 +3,11 @@
  */
 import styled from 'styled-components';
 import React from  'react';
-import { h51_article, stateKey, reducer} from '../components/Counter';
+import { h51_article as H5article, h5stateKey, h5reducer} from '../components/H5_article/index';
 
 
 const Div = styled.div`
-    background: green;
-    & .white{
-        background: red;
-    }
+    background: deeppink;
 `;
 
 export default class h51 extends React.Component{
@@ -23,7 +20,7 @@ export default class h51 extends React.Component{
             <Div>
                 2222
                 {/*<div className='white'>123</div>*/}
-                <h51_article value={0}/>
+                <H5article/>
             </Div>
         );
     }
@@ -42,15 +39,16 @@ const END_POINT = process.env.HOST_NAME || (isbrowser ? '127.0.0.1:9000':'123.20
 // console.log('111111111111-------------11111111111--------------111111111111')
 // console.log(process.env.HOST_NAME)
 // 初始化state
-const initState = () => {
-    return fetch(`http://${END_POINT}/api/count`).then(response => {
+const h5initState = () => {
+    return fetch(`http://${END_POINT}/api/h51`).then(response => {
         if (response.status !== 200) {
-            throw new Error('Fail to fetch count');
+            throw new Error('Fail to fetch h51');
         }
         return response.json();
     }).then(responseJson => {
-        return responseJson.count;
+        console.log('responseJson.dataMap:'+responseJson.dataMap)
+        return responseJson.dataMap;
     });
 }
 
-export {h51, reducer, initState, stateKey};
+export {h51, h5reducer, h5initState, h5stateKey};
