@@ -306,6 +306,25 @@ app.get('/123',function(req,res){
         res.json(questions)
 });
 
+
+const articledetail = {
+        "code": "200",
+        "message": null,
+        "dataMap": {
+            "id": 1136,
+            "title": "明媚入室静雅别墅清新时尚并存",
+            "subTitle": "",
+            "categoryTags": "设计精选",
+            "coverImgUrl": "http://img1.mklimg.com/g2/M00/13/4E/rBBrCVllvMeAGeVcAAFp2btayYw331.jpg",
+            "content": "<p>花开时节户外满目春色明媚得让人艳羡，家居又怎肯落下风呢？这款别墅中利用了清新的流行色用柔美、清新、活力演绎了一曲时尚的家具春曲，居住其中，犹如徜徉在春意满园中。<br/></p><p><img src=\"http://img1.mklimg.com/g1/M00/13/5A/rBBrBVllu-KARZlTAAUbIworL60248.jpg\" title=\"image001.jpg\"/></p><p>窗外满园绿意藏不住，屋内明媚春意入目来，便是客厅设计的入眼印象。空间中聚集了家居设计时尚流行色之亮黄、驼色和鸽灰（亦称冰川灰色），在大面积的玻璃窗的映衬下，多种色彩运用和碰撞，搭配出令人耳目一新的清新与时尚。</p><p><img src=\"http://img3.mklimg.com/g2/M00/13/5D/rBBrClllu--AAPJ5AATQ0oB_evs555.jpg\" title=\"image002.jpg\"/></p><p>自然光线穿过墙面窗户投射进来，宽敞的客厅更彰显出大宅的“静美”与“净雅”。利用鲜艳的色彩弱化大空间的“空”，客厅视觉感饱满且温馨；反之，借用舒适的自然光衬托室内色彩，使其愈加明艳、强烈，以“少无”衬托出“雅净”，这也是设计师精通光源与色彩设计的体现。</p><p><img src=\"http://img3.mklimg.com/g1/M00/13/5E/rBBrBlllu_2ALu5GAAUPnYQJikI221.jpg\" title=\"image003.jpg\"/></p><p>家居设计中对于柔美与温馨的呈现和把握，有时女设计师较之男设计师会更加容易拿捏。设计师通过色彩使用、软装搭配和光源设计，客厅空间的铺面而来的清新自然气质浓烈而直接，然而在略显粗犷的木作长茶几和驼色沙发的对比之下，又增添了几分阳刚美，故，柔得炫目、刚得适宜。</p><p><img src=\"http://img1.mklimg.com/g2/M00/13/4E/rBBrCVllvAiAIx4oAAaC2qt_4CU162.jpg\" title=\"image004.jpg\"/></p><p>轻工业风的餐厅吊灯与墙面自然风景为主题的装饰画，增添了用餐区的现代时尚感。相较于客厅的明艳，餐厅略显简凝，适于日常生活中家人在餐桌上的沟通交流，同时也便于多种用餐氛围的随心营造与转换。<br/></p><p><img src=\"http://img3.mklimg.com/g2/M00/13/5D/rBBrClllvDmAKIvGAASjFGqJ9wg052.jpg\" style=\"float:none;\" title=\"image005.jpg\"/></p><p><img src=\"http://img1.mklimg.com/g2/M00/13/5D/rBBrClllvDqAMV15AAR7N6dk0JI699.jpg\" style=\"float:none;\" title=\"image006.jpg\"/>开放式厨房因落地窗设计宽敞、明亮，搭配黄色插花和优雅桌椅，烹饪区变身艺术空间。烹饪情绪随空间设计而得到释放或被激发，舌尖上的快乐和惬意，自时尚的厨房设计而来。</p><p><img src=\"http://img1.mklimg.com/g2/M00/13/5D/rBBrClllvFOAAneWAAT0lRk94HQ664.jpg\" title=\"image007.jpg\"/></p><p>墙面及楼梯处运用了大量的几何图形，色彩以鸽灰色和亮驼色为主调，玄关的空间质感十分强烈，彰显出别墅即大宅的大气与高雅。楼梯阶梯内嵌的射灯光源温暖、别致，干净、利落的玄关增添了几分家的温馨感。</p><p><img src=\"http://img3.mklimg.com/g1/M00/13/5E/rBBrBlllvF-AfxQ3AAM_B-TZW9Y820.jpg\" title=\"image008.jpg\"/></p><p>自三楼俯瞰楼梯立面，融入了建筑设计手法的楼梯设计，几何线形带来的视觉享受过目深刻，宛若艺术品。</p><p><img src=\"http://img3.mklimg.com/g2/M00/13/5D/rBBrClllvGuAXEJdAAPmxER5eII373.jpg\" title=\"image009.jpg\"/></p><p>主卧色彩设计以浅色调为主，家纺用品同样与主题色系呼应，卧室静谧、舒适的氛围便轻松营造出来。</p><p><img src=\"http://img2.mklimg.com/g1/M00/13/5E/rBBrBlllvHmAKpsiAAQiLTAEIK4004.jpg\" title=\"image010.jpg\"/></p><p>陈设装饰看似简洁，然而并不单调。素雅的墙纸是卧室中最用心的装饰，使空间视觉轻松、惬意的同时，又显雅静。<br/></p><p><img src=\"http://img2.mklimg.com/g2/M00/13/4E/rBBrCVllvIyAZxRDAATI3YBFHRc367.jpg\" title=\"image011.jpg\"/></p><p>儿童房设计色彩缤纷，却不显繁杂，青草绿、海洋蓝、向日葵黄，均是激发孩子想象力和创造力的亮色系。富有童趣的床上用品、台灯及装饰画，满足了孩子天真心性。</p><p><img src=\"http://img2.mklimg.com/g1/M00/13/5A/rBBrBVllvJ2AfRVKAATrdLeZ9Fs938.jpg\" title=\"image012.jpg\"/></p><p>儿童活动区色彩活泼，布置随意，玩耍嬉戏的区域完全可由孩子随心所欲折腾，活动空间宽敞而富有生机，无拘无束之间，满足了孩子对世界的好奇心及无穷尽的潜在创造欲。</p><p><img src=\"http://img1.mklimg.com/g1/M00/13/5A/rBBrBVllvK6AT58uAAS5C3gVye4499.jpg\" title=\"image013.jpg\"/></p><p>独立的休闲区可用于阅读或家庭办公，百无聊赖时独处消遣时光，平复心绪欲认认真真读几本喜欢的书籍，亦或专心地投入到工作状态，这里可以成为另一个选择。</p><p><br/></p><p>来源：和家网</p>",
+            "tags": "色彩,极致好设计",
+            "tableName": "cms_article_custom"
+        }
+    }
+app.get('/articledetail',function(req,res){
+    res.status(200),
+        res.json(articledetail)
+});
 //配置服务端口
 var server = app.listen(8888, function () {
 

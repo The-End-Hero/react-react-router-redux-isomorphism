@@ -3,11 +3,9 @@
  */
 import styled from 'styled-components';
 import React, { PropTypes } from 'react';
-import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {increment, decrement} from './actions.js';
 import {connect} from 'react-redux';
-
 
 const Div = styled.div`
     background: red;
@@ -48,7 +46,7 @@ const DivList =styled.div`
         padding-left: .42667rem;
     }
 `
-export const h5stateKey = 'h51';
+export const articledetailstateKey = 'articledetail';
 
 const Itemarray = (props)=>{
     console.log('props:' +JSON.stringify(props.value))
@@ -56,11 +54,9 @@ const Itemarray = (props)=>{
     for(let i=0;i<props.value.length;i++){
         liarray.push(
             <DivList key={'Divlist'+i}>
-                {/*<Link to="/home">*/}
-                    <img key={i+'img'} src={props.value[i].recommendationData.coverImgUrl} alt=""/>
-                    <div key={i+'title'} className="title">{props.value[i].recommendationData.title}</div>
-                    <div key={i+'tags'} className="tags">{props.value[i].recommendationData.tags.replace(/,/g,'/')}</div>
-                {/*</Link>*/}
+                <img key={i+'img'} src={props.value[i].recommendationData.coverImgUrl} alt=""/>
+                <div key={i+'title'} className="title">{props.value[i].recommendationData.title}</div>
+                <div key={i+'tags'} className="tags">{props.value[i].recommendationData.tags.replace(/,/g,'/')}</div>
             </DivList>
         );
     }
@@ -105,13 +101,10 @@ class h51_article extends React.Component{
             });
         }
     }
-    jump(){
-        location.href=''
-    }
     render(){
         return(
             <Div onTouchMove={this.touchmove.bind(this)}>
-                <Itemarray value={this.state.value} jump={this.jump.bind(this)}/>
+                <Itemarray value={this.state.value}/>
                 {/*{liarray}*/}
                 {/*{*/}
                     {/*this.props.value.map((item) => {*/}
@@ -133,7 +126,7 @@ h51_article.propTypes = {
 const mapStateToProps = (state) => {
     console.log('state:'+JSON.stringify(state))
     return {
-        value: state[h5stateKey]
+        value: state[articledetailstateKey]
     }
 }
 

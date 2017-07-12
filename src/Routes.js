@@ -80,6 +80,27 @@ const getH51Page = (nextState, callback) => {
         });
     }, 'h51');
 };
+const getarticledetailPage = (nextState, callback) => {
+    require.ensure([], function(require) {
+        const {articledetail, articledetailreducer, articledetailstateKey, articledetailinitState} = require('./pages/articledetail.js');
+        const dehydratedState = (win && win.DEHYDRATED_STATE);
+        const state = store.getState();
+        const mergedState = {...dehydratedState, ...state};
+        const statePromise = mergedState[articledetailstateKey]
+            ? Promise.resolve(mergedState[articledetailstateKey])
+            : articledetailinitState();
+        statePromise.then((result) => {
+            store.reset(combineReducers({
+                ...store._reducers,
+                [articledetailstateKey]: articledetailreducer
+            }), {
+                ...state,
+                [articledetailstateKey]: result
+            });
+            callback(null, articledetail);
+        });
+    }, 'articledetail');
+};
 // const getAboutPage = (nextState, callback) => {
 //     require.ensure([], function(require) {
 //         callback(null, require('./pages/About.js').default);
@@ -102,6 +123,7 @@ const routes = (
     <Route path="counter" getComponent={getCounterPage} />
     <Route path="about" getComponent={getAboutPage} />
     <Route path="h51" getComponent={getH51Page}/>
+    <Route path="articledetail" getComponent={getarticledetailPage}/>
     <Route path="*" getComponent={getNotFoundPage} />
   </Route>
 );

@@ -13,6 +13,8 @@ import App from '../src/pages/App.js';
 import Home from '../src/pages/Home.js';
 import {page as CounterPage, reducer, stateKey, initState} from '../src/pages/CounterPage.js';
 import {h51 as H51, h5reducer, h5stateKey, h5initState} from '../src/pages/H5-hm-1.js';
+import {h51 as H51, h5reducer, h5stateKey, h5initState} from '../src/pages/articledetail.js';
+
 import About from '../src/pages/About.js';
 import NotFound from '../src/pages/NotFound.js';
 
