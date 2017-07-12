@@ -19,6 +19,33 @@ const Div = styled.div`
     }
  
 `;
+
+const DivList =styled.div`
+    background:#fff;
+    padding-bottom: .96rem;
+    & img{
+        display:block;
+        width:100%
+    }
+    & div{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    & .title{
+        font-size:0.533rem;
+        line-height:1.1;
+        padding-top: .45333rem;
+        padding-bottom: .26667rem;
+        padding-left: .42667rem;
+    }
+    & .tags{
+        font-size:0.32rem;
+        line-height:1.1;
+        color:#999;
+        padding-left: .42667rem;
+    }
+`
 export const h5stateKey = 'h51';
 
 const Itemarray = (props)=>{
@@ -26,12 +53,15 @@ const Itemarray = (props)=>{
     const liarray= [];
     for(let i=0;i<props.value.length;i++){
         liarray.push(
-            <li key={i}>最高气温:{props.value[i].tmp.max}最低气温:{props.value[i].tmp.min}</li>
+            <DivList key={'Divlist'+i}>
+                <img key={i+'img'} src={props.value[i].recommendationData.coverImgUrl} alt=""/>
+                <div key={i+'title'} className="title">{props.value[i].recommendationData.title}</div>
+                <div key={i+'tags'} className="tags">{props.value[i].recommendationData.tags.replace(/,/g,'/')}</div>
+            </DivList>
         );
     }
     return (
-       <div className='white'>
-           233
+       <div>
            {liarray}
        </div>
     )
@@ -44,19 +74,37 @@ class h51_article extends React.Component{
         }
     }
 
+
+    touchmove(event){
+        console.log(event);
+        console.log(event.target);
+        // console.log(event.target.offsetTop);
+        // console.log( document.body.scrollHeight );
+        console.log('网页被卷进去的高：'+ document.body.scrollTop)
+        console.log('页面整体高度：'+ document.body.scrollHeight )
+        console.log('窗口高度：'+window.innerHeight)
+        // console.log(event.)
+        if(window.innerHeight + document.body.scrollTop >= document.body.scrollHeight - 100){
+            fetch(`http://127.0.0.1:8888/123`).then(response => {
+                if (response.status !== 200) {
+                    throw new Error('Fail to fetch h51');
+                }
+                return response.json();
+            }).then(responseJson => {
+                // 天气
+                // console.log('responseJson.HeWeather5.daily_forecast:'+responseJson.HeWeather5[0].daily_forecast)
+                // return responseJson.HeWeather5[0].daily_forecast;
+                // return responseJson.dataMap;
+                this.setState({
+                    value:this.state.value.concat(responseJson.dataMap)
+                })
+            });
+        }
+    }
     render(){
-        // const {onIncrement,onDecrement} = this.props;
-        // const liarray= [];
-        // for(let i=0;i<this.state.value.length;i++){
-        //     liarray.push(
-        //         <div key={i}>{this.state.value[i].recommendationData.tags}</div>
-        //     );
-        // }
         return(
-            <Div>
-                2222
-                <div className='white'>123</div>
-                <Itemarray value={this.props.value}/>
+            <Div onTouchMove={this.touchmove.bind(this)}>
+                <Itemarray value={this.state.value}/>
                 {/*{liarray}*/}
                 {/*{*/}
                     {/*this.props.value.map((item) => {*/}

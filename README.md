@@ -1,5 +1,5 @@
-
-
+webstrom中setting-->system settings-->safe write 勾选关掉，这样容易触发项目的HMR
+src/Routes.js   server/Routes.server.js  
 ### express相关
     get是一种特殊的use
 

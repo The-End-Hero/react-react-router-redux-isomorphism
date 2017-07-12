@@ -50,7 +50,7 @@ app.use('/api/h51', (req, res) => {
     res.header("Access-Control-Allow-Origin", "*")
     console.log(123123123123)
     // res.header("Content-Type", "application/json");
-    res.json(JSON.stringify(require('./mock/h51.json')));
+    res.json(JSON.stringify(require('./mock/h51').replace(/\"/g,"'")));
 });
 app.get('*', (req, res) => {
   if (!assetManifest) {
