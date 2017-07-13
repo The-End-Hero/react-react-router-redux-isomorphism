@@ -7,7 +7,7 @@ import {Link} from 'react-router';
 import {bindActionCreators} from 'redux';
 import {increment, decrement} from './actions.js';
 import {connect} from 'react-redux';
-
+// import { browserHistory } from 'react-router'
 
 const Div = styled.div`
     background: red;
@@ -56,11 +56,11 @@ const Itemarray = (props)=>{
     for(let i=0;i<props.value.length;i++){
         liarray.push(
             <DivList key={'Divlist'+i}>
-                {/*<Link to="/home">*/}
+                <Link to="/articledetail" >
                     <img key={i+'img'} src={props.value[i].recommendationData.coverImgUrl} alt=""/>
                     <div key={i+'title'} className="title">{props.value[i].recommendationData.title}</div>
                     <div key={i+'tags'} className="tags">{props.value[i].recommendationData.tags.replace(/,/g,'/')}</div>
-                {/*</Link>*/}
+                </Link>
             </DivList>
         );
     }
@@ -79,9 +79,9 @@ class h51_article extends React.Component{
     }
 
 
-    touchmove(event){
-        console.log(event);
-        console.log(event.target);
+    touchmove(){
+        // console.log(event);
+        // console.log(event.target);
         // console.log(event.target.offsetTop);
         // console.log( document.body.scrollHeight );
         console.log('网页被卷进去的高：'+ document.body.scrollTop)
@@ -105,13 +105,19 @@ class h51_article extends React.Component{
             });
         }
     }
-    jump(){
-        location.href=''
-    }
+    // jump(id,event){
+    //     event.stopPropagation();
+    //     // event.isDefaultPrevented();
+    //     event.preventDefault();
+    //     browserHistory.push('/articledetail#'+id);
+    //     console.log('jump')
+    //     console.log(browserHistory)
+    //     // location.href='/articledetail'
+    // }
     render(){
         return(
-            <Div onTouchMove={this.touchmove.bind(this)}>
-                <Itemarray value={this.state.value} jump={this.jump.bind(this)}/>
+            <Div onTouchMove={this.touchmove.bind(this)} >
+                <Itemarray value={this.state.value}/>
                 {/*{liarray}*/}
                 {/*{*/}
                     {/*this.props.value.map((item) => {*/}

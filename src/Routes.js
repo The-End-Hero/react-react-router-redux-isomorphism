@@ -86,11 +86,14 @@ const getarticledetailPage = (nextState, callback) => {
         const dehydratedState = (win && win.DEHYDRATED_STATE);
         const state = store.getState();
         const mergedState = {...dehydratedState, ...state};
-        const statePromise = mergedState[articledetailstateKey]
-            ? Promise.resolve(mergedState[articledetailstateKey])
+        const statePromise = mergedState[articledetailstateKey] // 如果已经存在就拿到已存在的值，如果不存在就用initState函数return的值，因为fetch也是promise对象返回
+            ? Promise.resolve(mergedState[articledetailstateKey])// Promise.resolve(value)返回还是一个promise对象
             : articledetailinitState();
+        console.log('-------store.reset()-----------')
+        console.log(store.reset)
+        console.log('-------store.reset()-----------')
         statePromise.then((result) => {
-            store.reset(combineReducers({
+            store.reset(combineReducers({   //合并reducer
                 ...store._reducers,
                 [articledetailstateKey]: articledetailreducer
             }), {

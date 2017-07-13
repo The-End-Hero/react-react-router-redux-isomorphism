@@ -13,7 +13,7 @@ import App from '../src/pages/App.js';
 import Home from '../src/pages/Home.js';
 import {page as CounterPage, reducer, stateKey, initState} from '../src/pages/CounterPage.js';
 import {h51 as H51, h5reducer, h5stateKey, h5initState} from '../src/pages/H5-hm-1.js';
-import {h51 as H51, h5reducer, h5stateKey, h5initState} from '../src/pages/articledetail.js';
+import {articledetail as Articledetail, articledetailreducer, articledetailstateKey, articledetailinitState} from '../src/pages/articledetail.js';
 
 import About from '../src/pages/About.js';
 import NotFound from '../src/pages/NotFound.js';
@@ -29,6 +29,7 @@ const routes = (
     <Route path="counter" component={CounterPage} />
     <Route path="about" component={About} />
     <Route path="h51" component={H51}/>
+    <Route path="articledetail" component={Articledetail}/>
     <Route path="*" component={NotFound} />
   </Route>
 );
@@ -43,6 +44,11 @@ const pathInitData = {
       h5stateKey,
       h5reducer,
       h5initState
+  },
+  '/articledetail':{
+      articledetailstateKey,
+      articledetailreducer,
+      articledetailinitState
   }
 }
 
@@ -112,9 +118,12 @@ function renderMatchedPage(req, res, renderProps, assetManifest) {
     if(path === '/h51'){
         const {h5stateKey,h5reducer, h5initState} = pathInfo;
         renderPageredux(req, res, renderProps, assetManifest,h5stateKey,h5reducer, h5initState)
-    }else if(path === 'counter'){
+    }else if(path === '/counter'){
         const {stateKey, reducer, initState} = pathInfo;
         renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer, initState)
+    }else if(path === '/articledetail'){
+        const {articledetailstateKey, articledetailreducer, articledetailinitState} = pathInfo;
+        renderPageredux(req, res, renderProps, assetManifest,articledetailstateKey, articledetailreducer, articledetailinitState)
     }else{
         const {stateKey, reducer, initState} = pathInfo;
         renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer, initState)
@@ -128,7 +137,10 @@ function renderPageredux(req, res, renderProps, assetManifest,stateKey, reducer,
     const statePromise = (initState) ? initState() : Promise.resolve(null);
     statePromise.then((result) => {
         if (stateKey) {
-            const state = store.getState();
+            console.log('--------------...store._reducers--------------')
+            console.log(...store._reducers)
+            console.log('--------------...store._reducers--------------')
+            const state = store.getState(); //getState() 返回应用当前的 state 树。它与 store 的最后一个 reducer 返回值相同。
             store.reset(combineReducers({
                 ...store._reducers,
                 [stateKey]: reducer

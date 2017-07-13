@@ -24,7 +24,6 @@ const DivTop = styled.div`
           font-size:17px;
       }
     }
-    
 `
 
 const view = () => {
