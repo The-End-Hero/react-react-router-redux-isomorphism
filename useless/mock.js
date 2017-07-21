@@ -321,7 +321,11 @@ const articledetail = {
             "tableName": "cms_article_custom"
         }
     }
-app.get('/articledetail',function(req,res){
+app.get('/articledetail/:id',function(req,res){
+    res.status(200),
+        res.json(articledetail)
+});
+app.get('/articledetail/*',function(req,res){
     res.status(200),
         res.json(articledetail)
 });
