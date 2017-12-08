@@ -8,6 +8,7 @@ webpack devtool(Source Maps)
 
 
 pm2运行
+
 已将pm2写入到package.json中去，具体配置文件参考processes.json
 运行 npm run pm2 即运行pm2
 pm2 本身命令
