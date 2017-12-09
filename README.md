@@ -17,3 +17,6 @@ pm2 logs 查看日志
 pm2 list 查看所有进程
 pm2 stop all 停止所有进程
 pm2 start 相对路径地址 -i 0 // 0启动cpu最大核心数的进程
+
+
+即将更新
